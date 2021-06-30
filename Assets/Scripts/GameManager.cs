@@ -45,11 +45,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void StartGame()
-    { 
-        
-    }
-
     private IEnumerator ShowKeyButtonsRoutine()
     {
         foreach (Button3D keyButton in _keyButtons)

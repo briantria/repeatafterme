@@ -35,6 +35,11 @@ public class Button3D : MonoBehaviour
         }
     }
 
+    public void InteractWithoutNotify()
+    {
+        StartCoroutine(ClickRoutine());
+    }
+
     public void Show()
     {
         gameObject.SetActive(true);
