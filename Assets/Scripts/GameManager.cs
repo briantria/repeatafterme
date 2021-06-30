@@ -1,27 +1,46 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState
+{ 
+    Lobby,
+    LevelLoad,
+    LevelSay,
+    LevelListen,
+    LevelOver
+}
+
 public class GameManager : MonoBehaviour
 {
+    public static Action<GameState> OnChangeGameState;
+
     [SerializeField] private Button3D _playButton;
     [SerializeField] private List<Button3D> _keyButtons;
+
+    private GameState _currentGameState;
 
     #region Unity Messages
     private void OnEnable()
     {
         Button3D.OnClick += OnClickPlay;
         Button3D.OnClick += OnClickKeyButton;
+        LevelManager.OnLevelSayStart += NextGameState;
+        LevelManager.OnLevelSayDone += NextGameState;
     }
 
     private void OnDisable()
     {
         Button3D.OnClick -= OnClickPlay;
         Button3D.OnClick -= OnClickKeyButton;
+        LevelManager.OnLevelSayStart -= NextGameState;
+        LevelManager.OnLevelSayDone -= NextGameState;
     }
 
     private void Start()
     {
+        _currentGameState = GameState.Lobby;
         foreach (Button3D keyButton in _keyButtons)
         {
             keyButton.gameObject.SetActive(false);
@@ -31,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void OnClickPlay(Button3D button3D)
     {
-        if (button3D != _playButton)
+        if (button3D != _playButton || _currentGameState != GameState.Lobby)
         {
             return;
         }
@@ -52,5 +71,39 @@ public class GameManager : MonoBehaviour
             keyButton.Show();
             yield return new WaitForSeconds(0.1f);
         }
+
+        NextGameState();
+    }
+
+    public void NextGameState()
+    {
+        switch (_currentGameState)
+        {
+            case GameState.Lobby:
+                _currentGameState = GameState.LevelLoad;
+                break;
+
+            case GameState.LevelLoad:
+                _currentGameState = GameState.LevelSay;
+                break;
+
+            case GameState.LevelSay:
+                _currentGameState = GameState.LevelListen;
+                break;
+
+            case GameState.LevelListen:
+                _currentGameState = GameState.LevelOver;
+                break;
+
+            case GameState.LevelOver:
+                _currentGameState = GameState.LevelLoad;
+                break;
+
+            default:
+                break;
+        }
+
+        Debug.Log("Current game state: " + _currentGameState.ToString());
+        OnChangeGameState?.Invoke(_currentGameState);
     }
 }
