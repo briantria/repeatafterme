@@ -39,20 +39,37 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        LoadLevel(0);
+        //LoadLevel(0);
+        _currentLevel = new List<LevelItem>();
     }
     #endregion
 
     public void LoadLevel(int level)
     {
         Debug.Log("load level " + level.ToString());
-        LevelScriptableObject levelAsset = Resources.Load<LevelScriptableObject>("Levels/" + level.ToString());
-        if (levelAsset == null)
+        float randDelay = 0.0f;
+        if (level > 0)
         {
-            Debug.Log("No more levels.");
-            return;
+            randDelay = UnityEngine.Random.Range(0.2f, 1.0f);
         }
-        _currentLevel = levelAsset.LevelData;
+
+        _currentLevel.Add(new LevelItem
+        {
+            KeyIndex = UnityEngine.Random.Range(0, _keyButtons.Count),
+            KeyDelay = randDelay
+        });
+
+        _levelAnswer = new List<LevelItem>();
+        OnLevelSayStart?.Invoke();
+        StartCoroutine(LevelPlayRoutine());
+
+        //LevelScriptableObject levelAsset = Resources.Load<LevelScriptableObject>("Levels/" + level.ToString());
+        //if (levelAsset == null)
+        //{
+        //    Debug.Log("No more levels.");
+        //    return;
+        //}
+        //_currentLevel = levelAsset.LevelData;
     }
 
     private void OnClickMidButton(Button3D button3d)
@@ -98,6 +115,8 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator LevelPlayRoutine()
     {
+        yield return new WaitForSeconds(1.0f);
+
         foreach (LevelItem levelItem in _currentLevel)
         {
             yield return new WaitForSeconds(levelItem.KeyDelay);
