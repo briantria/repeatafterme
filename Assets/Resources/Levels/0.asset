@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelData:
   - _keyIndex: 0
-    _keyDelay: 0
+    _keyDelay: 0.2
   - _keyIndex: 2
     _keyDelay: 0.2
   - _keyIndex: 6

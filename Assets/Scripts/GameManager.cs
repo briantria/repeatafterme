@@ -9,7 +9,8 @@ public enum GameState
     LevelLoad,
     LevelSay,
     LevelListen,
-    LevelOver
+    LevelOver,
+    GameOver
 }
 
 public class GameManager : MonoBehaviour
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         Button3D.OnClick += OnClickKeyButton;
         LevelManager.OnLevelSayStart += NextGameState;
         LevelManager.OnLevelSayDone += NextGameState;
+        LevelManager.OnLevelAnswerDone += OnAnswerDone;
     }
 
     private void OnDisable()
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
         Button3D.OnClick -= OnClickKeyButton;
         LevelManager.OnLevelSayStart -= NextGameState;
         LevelManager.OnLevelSayDone -= NextGameState;
+        LevelManager.OnLevelAnswerDone -= OnAnswerDone;
     }
 
     private void Start()
@@ -73,6 +76,13 @@ public class GameManager : MonoBehaviour
         }
 
         NextGameState();
+    }
+
+    private void OnAnswerDone(bool isCorrect)
+    {
+        _currentGameState = isCorrect ? GameState.LevelLoad : GameState.GameOver;
+        Debug.Log("answer done. next state: " + _currentGameState.ToString());
+        OnChangeGameState?.Invoke(_currentGameState);
     }
 
     public void NextGameState()
