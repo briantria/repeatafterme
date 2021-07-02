@@ -12,15 +12,15 @@ public class ScoreManager : MonoBehaviour
 
     private List<GameObject> _stars = new List<GameObject>();
 
-    private void Start()
-    {
-        _stars.Add(_starObj);
-        for (int idx = 1; idx < 5; idx++)
-        {
-            GameObject obj = Instantiate(_starObj, _starGrid);
-            _stars.Add(obj);
-        }
-    }
+    //private void Start()
+    //{
+    //    _stars.Add(_starObj);
+    //    for (int idx = 1; idx < 2; idx++)
+    //    {
+    //        GameObject obj = Instantiate(_starObj, _starGrid);
+    //        _stars.Add(obj);
+    //    }
+    //}
 
     public void HideScore()
     {
@@ -33,16 +33,18 @@ public class ScoreManager : MonoBehaviour
 
         for (int idx = 0; idx < _stars.Count; ++idx)
         {
+            //Debug.Log("show star ["+ idx +"]: " + (idx < score));
             _stars[idx].SetActive(idx < score);
         }
 
-        if (score < _stars.Count)
+        if (score < _stars.Count - 1)
         {
             return;
         }
 
         for (int idx = _stars.Count; idx < score; ++idx)
         {
+            //Debug.Log("more stars [" + idx + "]");
             GameObject obj = Instantiate(_starObj, _starGrid);
             obj.SetActive(true);
             _stars.Add(obj);
