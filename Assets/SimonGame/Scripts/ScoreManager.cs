@@ -51,7 +51,7 @@ public class ScoreManager : MonoBehaviour
 
     public void Retry()
     {
-        Debug.Log("Retry");
+        //Debug.Log("Retry");
         OnRetry?.Invoke();
         HideScore();
     }

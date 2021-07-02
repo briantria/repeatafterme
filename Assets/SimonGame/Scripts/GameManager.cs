@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Current game state: " + _currentGameState.ToString());
+        //Debug.Log("Current game state: " + _currentGameState.ToString());
         OnChangeGameState?.Invoke(_currentGameState);
     }
 }

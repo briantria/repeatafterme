@@ -36,15 +36,17 @@ public class Buddy : MonoBehaviour
 
     private void OnChangeGameState(GameState gameState)
     {
+        //Debug.Log("look game state: " + gameState.ToString());
         switch (gameState)
         {
+            case GameState.LevelLoad:
             case GameState.LevelSay:
-                Debug.Log("look at grid");
+                //Debug.Log("look at grid");
                 _lookAtTarget = _lookAtGridTarget;
                 break;
 
             default:
-                Debug.Log("look at me");
+                //Debug.Log("look at me");
                 _lookAtTarget = _lookAtMeTarget;
                 break;
         }
