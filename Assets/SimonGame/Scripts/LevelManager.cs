@@ -63,7 +63,9 @@ public class LevelManager : MonoBehaviour
         float randDelay = 0.0f;
         if (level > 0)
         {
-            randDelay = UnityEngine.Random.Range(0.2f, 1.0f);
+            float[] validDelays = new float[] { 0.25f, 0.5f };
+            int randIdx = UnityEngine.Random.Range(0, validDelays.Length);
+            randDelay = validDelays[randIdx];
         }
 
         _currentLevel.Add(new LevelItem
