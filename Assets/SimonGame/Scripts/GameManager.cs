@@ -18,15 +18,12 @@ public class GameManager : MonoBehaviour
     public static Action<GameState> OnChangeGameState;
 
     [SerializeField] private ScoreManager _scoreManager;
-    //[SerializeField] private Button3D _playButton;
-    //[SerializeField] private List<Button3D> _keyButtons;
 
     private GameState _currentGameState;
 
     #region Unity Messages
     private void OnEnable()
     {
-        //Button3D.OnClick += OnClickPlay;
         LevelManager.OnGameStart += NextGameState;
         LevelManager.OnLevelSayStart += NextGameState;
         LevelManager.OnLevelSayDone += NextGameState;
@@ -36,7 +33,6 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        //Button3D.OnClick -= OnClickPlay;
         LevelManager.OnGameStart += NextGameState;
         LevelManager.OnLevelSayStart -= NextGameState;
         LevelManager.OnLevelSayDone -= NextGameState;
@@ -49,34 +45,8 @@ public class GameManager : MonoBehaviour
         _scoreManager.HideScore();
         _currentGameState = GameState.Lobby;
         OnChangeGameState?.Invoke(_currentGameState);
-        //foreach (Button3D keyButton in _keyButtons)
-        //{
-        //    keyButton.gameObject.SetActive(false);
-        //}
     }
     #endregion
-
-    //private void OnClickPlay(Button3D button3D)
-    //{
-    //    if (button3D != _playButton || _currentGameState != GameState.Lobby)
-    //    {
-    //        return;
-    //    }
-
-    //    _playButton.gameObject.SetActive(false);
-    //    StartCoroutine(ShowKeyButtonsRoutine());
-    //}
-
-    //private IEnumerator ShowKeyButtonsRoutine()
-    //{
-    //    foreach (Button3D keyButton in _keyButtons)
-    //    {
-    //        keyButton.Show();
-    //        yield return new WaitForSeconds(0.1f);
-    //    }
-
-    //    NextGameState();
-    //}
 
     private IEnumerator ShowScoreRoutine(int score)
     {

@@ -18,6 +18,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Button3D _playButton;
     [SerializeField] private List<Button3D> _keyButtons;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource _gameStartAudio;
+    [SerializeField] private AudioSource _gameOverAudio;
+
     private int _level = 0;
     private GameState _currentGameState;
     private List<LevelItem> _currentLevel;
@@ -94,6 +98,11 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        if (_gameStartAudio != null)
+        {
+            _gameStartAudio.Play();
+        }
+
         StartCoroutine(GameStartRoutine());
     }
 
@@ -109,6 +118,11 @@ public class LevelManager : MonoBehaviour
 
         if (keyIndex != checkIndex)
         {
+            if (_gameOverAudio != null)
+            {
+                _gameOverAudio.Play();
+            }
+
             OnLevelAnswerDone?.Invoke(false, _level);
             return;
         }
@@ -128,7 +142,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator GameStartRoutine()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.5f);
         _playButton.Hide();
 
         //yield return new WaitForSeconds(0.5f);
@@ -144,7 +158,7 @@ public class LevelManager : MonoBehaviour
     private IEnumerator LevelPlayRoutine()
     {
         //Debug.Log("Start Level Say");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
 
         foreach (LevelItem levelItem in _currentLevel)
         {
