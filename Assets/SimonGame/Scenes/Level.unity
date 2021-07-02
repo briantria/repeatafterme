@@ -7018,7 +7018,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2055188549}
   m_HandleRect: {fileID: 2055188548}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7121,7 +7121,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 48, y: 48}
-  m_Spacing: {x: 20, y: 20}
+  m_Spacing: {x: 8, y: 8}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1302095420
@@ -10455,7 +10455,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1947959388}
   m_HandleRect: {fileID: 1947959387}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

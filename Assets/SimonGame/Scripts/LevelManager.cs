@@ -79,6 +79,14 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LevelPlayRoutine());
     }
 
+    private void HideKeyButtons()
+    {
+        foreach (Button3D keyButton in _keyButtons)
+        {
+            keyButton.Hide();
+        }
+    }
+
     private void OnClickPlay(Button3D button3D)
     {
         if (button3D != _playButton || _currentGameState != GameState.Lobby)
@@ -96,23 +104,23 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        int keyIndex = _keyButtons.IndexOf(button3d);
+        int checkIndex = _currentLevel[_levelAnswer.Count].KeyIndex;
+
+        if (keyIndex != checkIndex)
+        {
+            OnLevelAnswerDone?.Invoke(false, _level);
+            return;
+        }
+
         _levelAnswer.Add(new LevelItem
         {
-            KeyIndex = _keyButtons.IndexOf(button3d)
+            KeyIndex = keyIndex
         });
 
         if (_levelAnswer.Count != _currentLevel.Count)
         {
             return;
-        }
-
-        for (int idx = 0; idx < _currentLevel.Count; ++idx)
-        {
-            if (_currentLevel[idx].KeyIndex != _levelAnswer[idx].KeyIndex)
-            {
-                OnLevelAnswerDone?.Invoke(false, _level);
-                return;
-            }
         }
 
         OnLevelAnswerDone?.Invoke(true, _level);
@@ -131,14 +139,6 @@ public class LevelManager : MonoBehaviour
         }
 
         OnGameStart?.Invoke();
-    }
-
-    private void HideKeyButtons()
-    {
-        foreach (Button3D keyButton in _keyButtons)
-        {
-            keyButton.Hide();
-        }
     }
 
     private IEnumerator LevelPlayRoutine()
