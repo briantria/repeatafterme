@@ -9,6 +9,7 @@ public class Button3D : MonoBehaviour
     public static Action<Button3D> OnClickDone;
 
     [SerializeField] private Transform _button3d;
+    [SerializeField] private AudioSource _audio;
 
     private Camera _mainCam;
     private Transform _transform;
@@ -54,6 +55,11 @@ public class Button3D : MonoBehaviour
 
     private IEnumerator ClickRoutine()
     {
+        if (_audio != null)
+        {
+            _audio.Play();
+        }
+
         Vector3 origPos = _button3d.localPosition;
         _button3d.localPosition -= Vector3.up * 0.2f;
         yield return new WaitForSeconds(0.05f);

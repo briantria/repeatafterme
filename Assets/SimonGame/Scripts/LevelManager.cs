@@ -118,7 +118,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator GameStartRoutine()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.7f);
         _playButton.Hide();
 
         //yield return new WaitForSeconds(0.5f);
