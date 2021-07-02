@@ -45,7 +45,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         _currentLevel = new List<LevelItem>();
-        _playButton.Show();
+        _playButton.gameObject.SetActive(false);
         foreach (Button3D keyButton in _keyButtons)
         {
             keyButton.gameObject.SetActive(false);

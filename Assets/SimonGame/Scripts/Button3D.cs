@@ -67,21 +67,46 @@ public class Button3D : MonoBehaviour
         OnClickDone?.Invoke(this);
     }
 
+    // source: https://www.febucci.com/2018/08/easing-functions/
+    public float EaseIn(float t)
+    {
+        return t * t;
+    }
+    static float Flip(float x)
+    {
+        return 1 - x;
+    }
+
+    public  float Spike(float t)
+    {
+        if (t <= .5f)
+            return EaseIn(t / .5f);
+
+        return EaseIn(Flip(t) / .5f);
+    }
+
     private IEnumerator ShowRoutine()
     {
-        _button3d.localScale = Vector3.zero;
-        while (_button3d.localScale.magnitude < 1.3f)
+        float duration = 0.2f;
+        float lapsTime = 0.0f;
+        Vector3 scale = new Vector3(1, 0.1f, 1);
+        while (scale.y <= 1)
         {
-            _button3d.localScale += Vector3.one * 0.02f;
+            _button3d.localScale = scale;
+            scale = Vector3.Slerp(new Vector3(1, 0.1f, 1), Vector3.one, lapsTime / duration);
+            lapsTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
 
-        while (_button3d.localScale.magnitude > 1)
-        {
-            _button3d.localScale -= Vector3.one * 0.005f;
-            yield return new WaitForEndOfFrame();
-        }
-
-        _button3d.localScale = Vector3.one;
+        //duration = 0.2f;
+        //lapsTime = 0.02f;
+        ////scale = new Vector3(1, 0.1f, 1);
+        //while (scale.y > 1)
+        //{
+        //    _button3d.localScale = scale;
+        //    scale = Vector3.Slerp(Vector3.one, new Vector3(1, 1.2f, 1), Spike(lapsTime / duration));
+        //    lapsTime += Time.deltaTime;
+        //    yield return new WaitForEndOfFrame();
+        //}
     }
 }
