@@ -14,12 +14,26 @@ public class Button3D : MonoBehaviour
 
     private Camera _mainCam;
     private Transform _transform;
-    
+    private Coroutine _buttonClickRoutine;
+
+    private Vector3 _origPos;
+    private Color _origColor;
 
     private void Awake()
     {
         _mainCam = Camera.main;
         _transform = transform;
+
+        _origPos = _button3d.localPosition;
+        _origColor = _buttonRenderer.material.color;
+    }
+
+    private void OnDisable()
+    {
+        if (_buttonClickRoutine != null)
+        {
+            StopCoroutine(_buttonClickRoutine);
+        }
     }
 
     public void OnInteract(InputValue value)
@@ -35,7 +49,12 @@ public class Button3D : MonoBehaviour
         {
             //Debug.Log("interact " + gameObject.name);
             OnClick?.Invoke(this);
-            StartCoroutine(ClickRoutine());
+            if (_buttonClickRoutine != null)
+            {
+                StopCoroutine(_buttonClickRoutine);
+            }
+
+            _buttonClickRoutine = StartCoroutine(ClickRoutine());
         }
     }
 
@@ -62,15 +81,36 @@ public class Button3D : MonoBehaviour
             _audio.Play();
         }
 
-        Color origColor = _buttonRenderer.material.color;
-        Vector3 origPos = _button3d.localPosition;
-        _button3d.localPosition -= Vector3.up * 0.2f;
-        // rgb: 2, 48, 71
-        _buttonRenderer.material.SetColor("_Color", new Color(0.0f,0.2f,0.3f));
+        float speed = 5.0f;
 
-        yield return new WaitForSeconds(0.1f);
-        _button3d.localPosition = origPos;
-        _buttonRenderer.material.SetColor("_Color", origColor);
+        Vector3 pressPos = _origPos - (Vector3.up * 0.3f);
+        _button3d.localPosition = pressPos;
+
+        float hue, saturation, colorValue;
+        Color.RGBToHSV(_origColor, out hue, out saturation, out colorValue);
+
+        saturation *= 2.0f;
+        colorValue *= 0.8f;
+
+        Color pressColor = Color.HSVToRGB(hue, saturation, colorValue);
+        _buttonRenderer.material.SetColor("_Color", pressColor);
+
+        float t = 0;
+        while (t < 0.9f)
+        {
+            yield return null; //new WaitForSeconds(0.05f);
+
+            Color deltaColor = Color.Lerp(pressColor, _origColor, t * t);
+            Vector3 deltaPos = Vector3.Lerp(pressPos, _origPos, t * t);
+
+            _button3d.localPosition = deltaPos;
+            _buttonRenderer.material.SetColor("_Color", deltaColor);
+
+            t += Time.deltaTime * speed;
+        }
+
+        _button3d.localPosition = _origPos;
+        _buttonRenderer.material.SetColor("_Color", _origColor);
         OnClickDone?.Invoke(this);
     }
 
