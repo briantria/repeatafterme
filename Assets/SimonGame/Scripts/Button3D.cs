@@ -9,10 +9,12 @@ public class Button3D : MonoBehaviour
     public static Action<Button3D> OnClickDone;
 
     [SerializeField] private Transform _button3d;
+    [SerializeField] private Renderer _buttonRenderer;
     [SerializeField] private AudioSource _audio;
 
     private Camera _mainCam;
     private Transform _transform;
+    
 
     private void Awake()
     {
@@ -60,10 +62,15 @@ public class Button3D : MonoBehaviour
             _audio.Play();
         }
 
+        Color origColor = _buttonRenderer.material.color;
         Vector3 origPos = _button3d.localPosition;
         _button3d.localPosition -= Vector3.up * 0.2f;
-        yield return new WaitForSeconds(0.05f);
+        // rgb: 2, 48, 71
+        _buttonRenderer.material.SetColor("_Color", new Color(0.0f,0.2f,0.3f));
+
+        yield return new WaitForSeconds(0.1f);
         _button3d.localPosition = origPos;
+        _buttonRenderer.material.SetColor("_Color", origColor);
         OnClickDone?.Invoke(this);
     }
 

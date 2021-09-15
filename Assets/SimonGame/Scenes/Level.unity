@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 32386077}
+  _buttonRenderer: {fileID: 0}
   _audio: {fileID: 32386073}
 --- !u!65 &32386075
 BoxCollider:
@@ -1572,6 +1573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 223060683}
+  _buttonRenderer: {fileID: 2006685127}
   _audio: {fileID: 0}
 --- !u!1 &226513992
 GameObject:
@@ -2083,6 +2085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 469582608}
+  _buttonRenderer: {fileID: 1115997220}
   _audio: {fileID: 469582609}
 --- !u!65 &469582606
 BoxCollider:
@@ -3302,6 +3305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 621899814}
+  _buttonRenderer: {fileID: 576630915}
   _audio: {fileID: 621899815}
 --- !u!65 &621899812
 BoxCollider:
@@ -3692,6 +3696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 684921700}
+  _buttonRenderer: {fileID: 745770946}
   _audio: {fileID: 684921701}
 --- !u!65 &684921698
 BoxCollider:
@@ -4895,6 +4900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 724020645}
+  _buttonRenderer: {fileID: 2051061998}
   _audio: {fileID: 724020646}
 --- !u!65 &724020643
 BoxCollider:
@@ -8270,6 +8276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 1167970925}
+  _buttonRenderer: {fileID: 583468953}
   _audio: {fileID: 1167970926}
 --- !u!65 &1167970923
 BoxCollider:
@@ -8626,6 +8633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 1200615233}
+  _buttonRenderer: {fileID: 906008869}
   _audio: {fileID: 1200615234}
 --- !u!65 &1200615231
 BoxCollider:
@@ -9454,7 +9462,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16676
+  m_Name: pb_Mesh17056
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11001,6 +11009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 1601453079}
+  _buttonRenderer: {fileID: 740848551}
   _audio: {fileID: 1601453080}
 --- !u!65 &1601453077
 BoxCollider:
@@ -11926,6 +11935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 1845725809}
+  _buttonRenderer: {fileID: 1103382651}
   _audio: {fileID: 1845725810}
 --- !u!65 &1845725807
 BoxCollider:
@@ -12091,7 +12101,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16926
+  m_Name: pb_Mesh17508
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13143,7 +13153,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16786
+  m_Name: pb_Mesh17226
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14027,6 +14037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button3d: {fileID: 2130301762}
+  _buttonRenderer: {fileID: 688186245}
   _audio: {fileID: 2130301763}
 --- !u!65 &2130301760
 BoxCollider:
